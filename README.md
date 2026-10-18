@@ -2,7 +2,7 @@
 
 **Research area:** Statistics / Applied Mathematics  
 **Methods:** Python, pandas, descriptive statistics, Wilson intervals, matplotlib  
-**Status:** Analysis executed on the public match dataset; results are included below and in `results/`.
+**Status:** Analysis executed on the public match dataset; results are included below and in the linked tables and report at the repository root.
 
 ## Research question
 How do six selected elite men's singles players differ in their observed match win percentages, year-to-year variation, first-game conversion, and three-game match results?
@@ -33,25 +33,25 @@ Source: [SahilMotyar/bwf-match-data](https://github.com/SahilMotyar/bwf-match-da
 
 SHI Yu Qi had the highest **observed** match win percentage in this selected sample, but this is not an opponent-adjusted measure of player strength.
 
-![Observed match win percentages](figures/overall_win_percentages.png)
+![Observed match win percentages](overall_win_percentages.png)
 
 ### Comparing 2024 and 2025
 
 LEE Zii Jia had the largest observed change, from **69.4% (34/49)** in 2024 to **28.6% (2/7)** in 2025, a difference of **−40.8 percentage points**. The seven-match 2025 sample is too small to support a confident claim that underlying ability declined. This is a useful example of why denominators matter.
 
-![Win percentage by year](figures/year_comparison.png)
+![Win percentage by year](year_comparison.png)
 
 ### First-game conversion
 
 Of **315 selected-player observations** where the player won the first game of a *validated completed match*, **282** were match wins: **89.5%**. This is a descriptive conditional proportion, not evidence that the first-game win independently causes a match win.
 
-![First-game conversion](figures/first_game_conversion.png)
+![First-game conversion](first_game_conversion.png)
 
 ### Three-game matches
 
 Among **178 selected-player observations** in validated completed three-game matches, **120** ended in wins (**67.4%**). These are selected-player observations, not 178 distinct matches, and are not a test of “clutch ability.”
 
-![Three-game results](figures/three_game_performance.png)
+![Three-game results](three_game_performance.png)
 
 ## How the analysis works
 1. Read the source match file and filter to the study period, discipline, and main draw.
@@ -70,9 +70,9 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Open `Badminton_Statistical_Analysis.ipynb` and use **Run All Cells**. The notebook looks for `data/ms.csv` first and otherwise attempts to download it from the linked source. Four charts are saved to `figures/`, summary CSV tables and `FINAL_REPORT.md` to `results/`, and derived player-level observations to `data/`.
+Open `Badminton_Statistical_Analysis.ipynb` and use **Run All Cells**. The notebook looks for `data/ms.csv` first and otherwise attempts to download it from the linked source. When run locally, four charts are saved to `figures/`, summary CSV tables and `FINAL_REPORT.md` to `results/`, and derived player-level observations to `data/`. For ease of browsing, the published repository stores copies of the charts, tables, and report at the repository root.
 
-**For this repository:** the raw third-party `ms.csv` is not redistributed; the user must obtain it from the source if offline. The saved notebook and included outputs were generated from the uploaded source CSV and independently cross-checked for basic internal consistency.
+**For this repository:** the raw third-party `ms.csv` is not redistributed; the user must obtain it from the source if offline. The saved notebook and published outputs were generated from the source CSV and checked for basic internal consistency.
 
 ## Limitations
 - These are nonrandomly selected players, not all men's singles competitors.
@@ -85,9 +85,9 @@ Open `Badminton_Statistical_Analysis.ipynb` and use **Run All Cells**. The noteb
 
 ## Files
 - `Badminton_Statistical_Analysis.ipynb` — full analysis, code explanations, and executed outputs
-- `figures/` — four actual plots
-- `results/` — computed tables and findings report
-- `METHODS_AND_EXPLANATIONS.md` — optional study notes
+- `overall_win_percentages.png`, `year_comparison.png`, `first_game_conversion.png`, `three_game_performance.png` — four plots
+- `overall_summary.csv`, `annual_summary.csv`, `first_game_conversion.csv`, `three_game_summary.csv` — computed tables
+- `FINAL_REPORT.md` — findings, limitations and conclusion
 - `requirements.txt` — dependencies
 
 ## Source credit
