@@ -1,7 +1,7 @@
-player,matches,wins,losses,win_pct,ci_low,ci_high
-SHI Yu Qi,95,82,13,86.3,78.0,91.8
-Viktor AXELSEN,61,48,13,78.7,66.9,87.1
-Kunlavut VITIDSARN,108,80,28,74.1,65.1,81.4
-LI Shi Feng,91,60,31,65.9,55.7,74.8
-LEE Zii Jia,56,36,20,64.3,51.2,75.5
-Lakshya SEN,77,45,32,58.4,47.3,68.8
+player,game1_wins,match_wins,conversion_pct
+SHI Yu Qi,69,65,94.20289855072464
+Viktor AXELSEN,42,39,92.85714285714286
+Kunlavut VITIDSARN,70,66,94.28571428571429
+LI Shi Feng,59,49,83.05084745762711
+LEE Zii Jia,32,27,84.375
+Lakshya SEN,43,36,83.72093023255815
