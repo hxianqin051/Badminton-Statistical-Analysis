@@ -1,28 +1,39 @@
-# Badminton Performance: A Statistical Study of Elite Men's Singles (2024–2025)
+# Badminton Player Performance Analysis (2024–2025)
 
-**Research area:** Statistics / Applied Mathematics  
-**Methods:** Python, pandas, descriptive statistics, Wilson intervals, matplotlib  
-**Status:** Analysis executed on the public match dataset; results are included below and in the linked tables and report at the repository root.
+**Focus:** Statistics and Applied Mathematics  
+**Tools:** Python, pandas, matplotlib  
+**Data:** Public men's singles badminton match records
 
-## Research question
-How do six selected elite men's singles players differ in their observed match win percentages, year-to-year variation, first-game conversion, and three-game match results?
+## About the project
 
-This is a descriptive observational case study, **not** a player ranking, a causal experiment, or a predictive model.
+I follow professional badminton and wanted to look at match results from a statistical point of view. Instead of only comparing tournament titles or world rankings, this project looks at match win rates and a few situations within matches.
 
-## Dataset and study design
-Source: [SahilMotyar/bwf-match-data](https://github.com/SahilMotyar/bwf-match-data), a third-party compilation of public badminton match results (not an official research publication).
+I used publicly available results from 2024 and 2025 to compare six men's singles players: SHI Yu Qi, Viktor AXELSEN, Kunlavut VITIDSARN, LI Shi Feng, Lakshya SEN, and LEE Zii Jia.
 
-- All men's singles main-draw records dated **2024-01-01 through 2025-12-31** involving at least one of the six players
-- Six selected players: SHI Yu Qi, Viktor AXELSEN, Kunlavut VITIDSARN, LI Shi Feng, Lakshya SEN, LEE Zii Jia
-- **454 distinct match records**; these become **488 player-match observations** because a match between two selected players contributes one observation to each player's individual record
-- **475 player-match observations** have validated complete scorelines and enter game-level calculations
-- Qualifying rounds are excluded; quarterfinals are included. Match results with incomplete scores can contribute to overall win percentages, but not to game-specific analyses.
+The goal is to make clear comparisons using basic statistics, not to decide who is the best player.
+
+## Questions
+
+- How do the six players' overall win rates compare?
+- What changed between 2024 and 2025?
+- How often did players win the match after winning the first game?
+- How did they perform in matches that went to a third game?
+
+## Data and method
+
+The records come from [Sahil Motyar's badminton match dataset](https://github.com/SahilMotyar/bwf-match-data), a third-party collection of public tournament results. It is not an official BWF research dataset.
+
+I looked at men's singles main-draw matches from **2024–2025** involving at least one of these six players. The analysis includes **454 separate matches**. For individual player statistics, the program creates a record for each selected player in a match. That gives **488 player-match records**, because matches between two selected players count once for each player.
+
+For the first-game and third-game questions, I used only records with complete, consistent scores: **475 player-match records**. Matches with incomplete scores still count toward overall results when the winner is known.
+
+The Python notebook filters the data, checks for duplicates and incomplete scores, calculates percentages, and makes the charts shown below. The percentage of matches won is calculated as **wins ÷ matches × 100**.
 
 ## Results
 
-### Overall match records
+### 1. Overall win rate
 
-| Player | Wins | Matches | Win % |
+| Player | Wins | Matches | Win rate |
 |---|---:|---:|---:|
 | SHI Yu Qi | 82 | 95 | 86.3% |
 | Viktor AXELSEN | 48 | 61 | 78.7% |
@@ -31,64 +42,63 @@ Source: [SahilMotyar/bwf-match-data](https://github.com/SahilMotyar/bwf-match-da
 | LEE Zii Jia | 36 | 56 | 64.3% |
 | Lakshya SEN | 45 | 77 | 58.4% |
 
-SHI Yu Qi had the highest **observed** match win percentage in this selected sample, but this is not an opponent-adjusted measure of player strength.
+SHI Yu Qi had the highest win rate in this dataset, winning **82 of 95 matches (86.3%)**. This is a comparison of recorded results, though, not a complete measure of who is stronger. The players did not all face the same opponents.
 
-![Observed match win percentages](overall_win_percentages.png)
+![Overall match win rates](overall_win_percentages.png)
 
-### Comparing 2024 and 2025
+### 2. Changes between 2024 and 2025
 
-LEE Zii Jia had the largest observed change, from **69.4% (34/49)** in 2024 to **28.6% (2/7)** in 2025, a difference of **−40.8 percentage points**. The seven-match 2025 sample is too small to support a confident claim that underlying ability declined. This is a useful example of why denominators matter.
+SHI Yu Qi's win rate went from **83.7% in 2024** to **89.1% in 2025**. LEE Zii Jia had the biggest drop in the selected data, from **69.4% (34/49)** to **28.6% (2/7)**.
 
-![Win percentage by year](year_comparison.png)
+The second number needs context: LEE Zii Jia had only **seven** eligible matches in 2025. With such a small sample, a few match results can make the percentage change a lot. I would not use this result alone to say his playing ability declined by the same amount.
 
-### First-game conversion
+![Win rates by year](year_comparison.png)
 
-Of **315 selected-player observations** where the player won the first game of a *validated completed match*, **282** were match wins: **89.5%**. This is a descriptive conditional proportion, not evidence that the first-game win independently causes a match win.
+### 3. Winning the first game
 
-![First-game conversion](first_game_conversion.png)
+For the selected player records with complete scores, winning the first game was followed by a match win **282 out of 315 times (89.5%)**.
 
-### Three-game matches
+That is a strong connection in these results, but it is not surprising: a player must win two games to win the match. This number describes what happened in the sample; it does not show that winning Game 1 independently *caused* the final win.
 
-Among **178 selected-player observations** in validated completed three-game matches, **120** ended in wins (**67.4%**). These are selected-player observations, not 178 distinct matches, and are not a test of “clutch ability.”
+![Winning the first game and winning the match](first_game_conversion.png)
 
-![Three-game results](three_game_performance.png)
+### 4. Three-game matches
 
-## How the analysis works
-1. Read the source match file and filter to the study period, discipline, and main draw.
-2. Remove exact duplicate records and restrict to matches involving the selected players.
-3. Validate completed game scores before game-level analyses.
-4. Convert match-level records into player-level observations.
-5. Count wins and matches, calculate descriptive percentages and Wilson intervals, and generate figures and result tables.
-6. Explain sample size and design limitations before drawing conclusions.
+Among the selected player records in completed three-game matches, **120 out of 178 (67.4%)** ended in wins. This number is based on player records, not 178 different matches, since some matches involve two players in the study.
 
-## Reproduce the analysis
+The chart compares their results in longer matches. It does not, by itself, tell us who handles pressure best.
 
-Install Python 3 and Jupyter, then from the project directory run:
+![Results in three-game matches](three_game_performance.png)
+
+## What I learned
+
+The main lesson for me is that percentages need context. A win rate can look impressive or disappointing, but the number of matches and the level of competition matter. Comparing just the percentages can miss an important part of the story.
+
+This project also gave me a practical way to use Python for organizing sports data, checking records, and turning calculations into charts.
+
+## Limits of the analysis
+
+- Only six players and two years are included.
+- Players had different numbers of matches and faced different opponents.
+- The source is a third-party dataset, so missing or incorrect records are possible.
+- Some matches were left out of game-by-game analysis because the scores were incomplete.
+- The results show patterns in recorded matches, not cause and effect or predictions of future matches.
+
+## Files and how to run
+
+- [`Badminton_Statistical_Analysis.ipynb`](Badminton_Statistical_Analysis.ipynb) — Python code, calculations, and charts
+- [`FINAL_REPORT.md`](FINAL_REPORT.md) — a short discussion of the findings
+- `overall_summary.csv`, `annual_summary.csv`, `first_game_conversion.csv`, `three_game_summary.csv` — summary tables
+- Four `.png` files — charts displayed above
+- `requirements.txt` — Python packages used
+
+To run the notebook locally, install Python and Jupyter, then use:
 
 ```bash
 pip install -r requirements.txt
 jupyter notebook
 ```
 
-Open `Badminton_Statistical_Analysis.ipynb` and use **Run All Cells**. The notebook looks for `data/ms.csv` first and otherwise attempts to download it from the linked source. When run locally, four charts are saved to `figures/`, summary CSV tables and `FINAL_REPORT.md` to `results/`, and derived player-level observations to `data/`. For ease of browsing, the published repository stores copies of the charts, tables, and report at the repository root.
+Open `Badminton_Statistical_Analysis.ipynb` and select **Run All Cells**. It reads `data/ms.csv` when available, or tries to download the source data. The notebook saves its generated outputs under `figures/` and `results/`; copies of the final charts and tables are also provided at the top level of this repository.
 
-**For this repository:** the raw third-party `ms.csv` is not redistributed; the user must obtain it from the source if offline. The saved notebook and published outputs were generated from the source CSV and checked for basic internal consistency.
-
-## Limitations
-- These are nonrandomly selected players, not all men's singles competitors.
-- Match counts and opponent strength differ; win percentages are not opponent-adjusted.
-- Year-to-year comparisons may be unstable with small samples, especially the seven matches for LEE Zii Jia in 2025.
-- Game-level analysis omits records lacking complete, consistent scores.
-- Some matches between chosen players appear twice in the player-view table, once from each player's perspective. Counts of observations must not be mislabeled as distinct matches.
-- Repeated matches, nonrandom samples and uneven opponent strength limit the interpretation of the descriptive 95% Wilson intervals.
-- These statistics do not establish cause-and-effect or predict future performance.
-
-## Files
-- `Badminton_Statistical_Analysis.ipynb` — full analysis, code explanations, and executed outputs
-- `overall_win_percentages.png`, `year_comparison.png`, `first_game_conversion.png`, `three_game_performance.png` — four plots
-- `overall_summary.csv`, `annual_summary.csv`, `first_game_conversion.csv`, `three_game_summary.csv` — computed tables
-- `FINAL_REPORT.md` — findings, limitations and conclusion
-- `requirements.txt` — dependencies
-
-## Source credit
-Sahil Motyar, [bwf-match-data](https://github.com/SahilMotyar/bwf-match-data). The analysis is independent of BWF and the dataset maintainer.
+**Data credit:** [Sahil Motyar — bwf-match-data](https://github.com/SahilMotyar/bwf-match-data). The project is not affiliated with BWF or the dataset maintainer.
